@@ -74,7 +74,28 @@ async function testOA() {
   }
 }
 
+async function sendWA() {
+  try {
+    getAuth();
+    const phone = document.getElementById('waPhone').value.trim();
+    const text = document.getElementById('waText').value.trim();
+    if (!phone || !text) {
+      document.getElementById('sendWAResult').textContent = 'Zadejte telefon i text.';
+      return;
+    }
+    document.getElementById('sendWAResult').textContent = 'Odesilam...';
+    const data = await fetchJson('/api/status/test/whatsapp/send', {
+      method: 'POST',
+      body: JSON.stringify({ phone, text }),
+    });
+    document.getElementById('sendWAResult').textContent = 'Odeslano:\n' + fmt(data);
+  } catch (e) {
+    document.getElementById('sendWAResult').textContent = 'Chyba odeslani: ' + e.message;
+  }
+}
+
 document.getElementById('loadStatus').addEventListener('click', loadStatus);
 document.getElementById('testWA').addEventListener('click', testWA);
 document.getElementById('testOA').addEventListener('click', testOA);
+document.getElementById('sendWA').addEventListener('click', sendWA);
 document.getElementById('exitBtn').addEventListener('click', () => window.close());

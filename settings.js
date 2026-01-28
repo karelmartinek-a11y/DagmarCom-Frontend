@@ -67,6 +67,19 @@ async function saveSettings() {
       'outputPrefixAlways',
       'openaiApiKey',
       'openaiModel',
+      'emailAutoEnabled',
+      'emailSendMode',
+      'imapHost',
+      'imapPort',
+      'imapUser',
+      'imapPass',
+      'imapInbox',
+      'imapSpam',
+      'imapDrafts',
+      'smtpHost',
+      'smtpPort',
+      'smtpUser',
+      'smtpPass',
     ].forEach(
       (id) => {
         const el = document.getElementById(id);
@@ -165,3 +178,23 @@ document.getElementById('deleteApiKey').addEventListener('click', deleteApiKey);
 document.getElementById('loadModels').addEventListener('click', fetchModels);
 document.getElementById('modelSelect').addEventListener('change', onModelSelectChange);
 document.getElementById('saveKeyBtn').addEventListener('click', saveSettings);
+document.getElementById('testEmail').addEventListener('click', async () => {
+  try {
+    getAuth();
+    document.getElementById('emailStatus').textContent = 'Testuji...';
+    await fetchJson('/api/email/test', { method: 'POST' });
+    document.getElementById('emailStatus').textContent = 'IMAP/SMTP OK';
+  } catch (e) {
+    document.getElementById('emailStatus').textContent = 'Chyba: ' + e.message;
+  }
+});
+document.getElementById('runEmailNow').addEventListener('click', async () => {
+  try {
+    getAuth();
+    document.getElementById('emailStatus').textContent = 'Spoustim...';
+    await fetchJson('/api/email/process', { method: 'POST' });
+    document.getElementById('emailStatus').textContent = 'Hotovo';
+  } catch (e) {
+    document.getElementById('emailStatus').textContent = 'Chyba: ' + e.message;
+  }
+});

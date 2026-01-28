@@ -41,6 +41,35 @@
   </section>
 
   <section class="card">
+    <h2>Email (recepce@hotelchodovasc.cz)</h2>
+    <label><input type="checkbox" id="emailAutoEnabled" /> Zapnout emailové odpovědi</label>
+    <label>Režim odeslání
+      <select id="emailSendMode">
+        <option value="draft">Uložit do konceptů</option>
+        <option value="send">Odeslat ihned</option>
+      </select>
+    </label>
+    <label>IMAP host<input id="imapHost" /></label>
+    <label>IMAP port<input id="imapPort" type="number" value="993" /></label>
+    <label>IMAP user<input id="imapUser" /></label>
+    <label>IMAP pass<input id="imapPass" type="password" autocomplete="off" /></label>
+    <label>Složka INBOX<input id="imapInbox" placeholder="INBOX" /></label>
+    <label>Složka SPAM<input id="imapSpam" placeholder="SPAM" /></label>
+    <label>Složka Drafts<input id="imapDrafts" placeholder="Drafts" /></label>
+
+    <label>SMTP host<input id="smtpHost" /></label>
+    <label>SMTP port<input id="smtpPort" type="number" value="587" /></label>
+    <label>SMTP user<input id="smtpUser" /></label>
+    <label>SMTP pass<input id="smtpPass" type="password" autocomplete="off" /></label>
+
+    <div class="actions">
+      <button id="testEmail">Otestovat IMAP/SMTP</button>
+      <button id="runEmailNow">Spustit zpracování inboxu</button>
+      <span id="emailStatus"></span>
+    </div>
+  </section>
+
+  <section class="card">
     <h2>Prompt</h2>
     <label>Instructions – 1. odpoved<textarea id="instructionsFirst"></textarea></label>
     <label>Instructions – dalsi odpoved<textarea id="instructionsNext"></textarea></label>

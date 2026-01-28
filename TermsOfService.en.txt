@@ -1,0 +1,10 @@
+Terms of Service – DagmarCom
+
+1. Provider: Aqua Sport Club s.r.o., ID 27125529, Medrova 169/22, 142 00 Prague 4, Czech Republic.
+2. Service: informational hotline for Hotel Chodov ASC via WhatsApp. The service does not create reservations or provide legal/financial advice.
+3. Availability: automated operation; no guarantee of uninterrupted availability or responses to every message.
+4. Liability: responses are informational only. The provider is not liable for damages caused by reliance on the bot. Accommodation contracts or orders are valid only after confirmation by the hotel reception.
+5. Price: service is free; carrier data/SMS charges may apply.
+6. Data protection: see Privacy Policy and GDPR notice. The Del URL allows immediate erasure.
+7. Changes: terms may be updated by publishing a new version at api.hcasc.cz/TermsOfService.en.txt.
+8. Contact: recepce@hotelchodov.cz, +420 261 090 900.

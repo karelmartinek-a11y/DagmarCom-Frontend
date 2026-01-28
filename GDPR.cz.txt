@@ -1,0 +1,17 @@
+GDPR – Informace o zpracovani osobnich udaju
+
+Provozovatel: Aqua Sport Club s.r.o., IC 27125529, se sidlem Medrova 169/22, 142 00 Praha 4 – Cholupice, zapis v OR: MS Praha, oddil C, vlozka 96483. Kontakt: recepce@hotelchodov.cz, +420 261 090 900.
+
+Ucel: automaticke poskytovani informaci zakaznikum hotelu Chodov ASC prostrednictvim WhatsApp cisla +420608877424.
+
+Rozsah udaju: telefonni cislo odesilatele, obsah zprav, technicke metadata (cas, response_id), logy komunikace.
+
+Pravni zaklad: opravnene zajmy (art. 6 odst. 1 f GDPR) – poskytovani informacni linky. Prihlaseni k smazani dat lze provest kliknutim na Del URL v dorucene zprave.
+
+Doba uchovani: 30 dni od vzniku zpravy; po 8 hodinach neaktivity je odesilatel informovan o uchovani. Na zadost jsou data ihned smazana.
+
+Prava subjektu: pravo na pristup, opravu, vymaz, omezeni, namitku, prenositelnost, stiznost u UOOU. Zadosti smerujte na gdpr@hotelchodov.cz.
+
+Zpracovatele: Meta Platforms, Inc. (WhatsApp Business API), OpenAI, poskytovatele hostingu a IT podpory. Prenos do tretich zemi je kryt standardnimi smluvnimi dolozkami.
+
+Bezpecnost: sifrovane prenosy (TLS), pristup omezen heslem, logovani pristupu, ulozeni v zabezpecenem prostredi Ubuntu serveru.

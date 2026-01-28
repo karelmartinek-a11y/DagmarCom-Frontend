@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <title>DagmarCom – Nastaveni</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>DagmarCom – Nastaveni</h1>
+    <p>Rozhrani pro spravu automatickych odpovedi na WhatsApp cisle +420608877424.</p>
+  </header>
+
+  <section class="card">
+    <h2>Prihlaseni</h2>
+    <label>Heslo (Basic Auth): <input id="password" type="password" placeholder="+Sin8glov8" /></label>
+    <button id="loadSettings">Nacist nastaveni</button>
+    <span id="loginStatus"></span>
+  </section>
+
+  <section class="grid">
+    <div class="card">
+      <h2>Automaticke odpovedi</h2>
+      <label><input type="checkbox" id="autoEnabled" /> Zapnout odpovidani</label>
+    </div>
+
+    <div class="card">
+      <h2>OpenAI</h2>
+      <label>API klíč<input id="openaiApiKey" type="password" /></label>
+      <label>Model<input id="openaiModel" placeholder="gpt-4.1" /></label>
+    </div>
+
+    <div class="card">
+      <h2>Prompt</h2>
+      <label>Instructions<textarea id="instructions"></textarea></label>
+      <label>Role<textarea id="role"></textarea></label>
+      <label>Context<textarea id="context"></textarea></label>
+      <label>Input suffix<textarea id="inputSuffix"></textarea></label>
+      <label>Output 1. odpoved<textarea id="outputPrefixFirst"></textarea></label>
+      <label>Output dalsi<textarea id="outputPrefixNext"></textarea></label>
+      <label>Output vse<textarea id="outputPrefixAlways"></textarea></label>
+    </div>
+  </section>
+
+  <div class="actions">
+    <button id="saveBtn">Ulozit</button>
+    <span id="saveStatus"></span>
+  </div>
+
+  <section class="card">
+    <h2>Logy</h2>
+    <div class="filters">
+      <input id="filterPhone" placeholder="Telefon" />
+      <input id="filterText" placeholder="Fulltext" />
+      <button id="loadLogs">Vyhledat</button>
+    </div>
+    <pre id="logOutput">(zatim nic)</pre>
+  </section>
+
+  <script src="settings.js"></script>
+</body>
+</html>

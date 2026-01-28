@@ -1,0 +1,17 @@
+GDPR – Data Processing Notice
+
+Controller: Aqua Sport Club s.r.o., ID 27125529, registered office Medrova 169/22, 142 00 Prague 4 – Cholupice, Czech Republic. Commercial Register: Municipal Court in Prague, Section C, File 96483. Contact: recepce@hotelchodov.cz, +420 261 090 900.
+
+Purpose: automated information service for customers of Hotel Chodov ASC via WhatsApp number +420608877424.
+
+Data scope: sender phone number, message content, technical metadata (timestamp, response_id), communication logs.
+
+Legal basis: legitimate interest (Art. 6(1)(f) GDPR) – operating an information hotline. Data can be erased immediately via the Del URL provided in the conversation.
+
+Retention: 30 days from message creation; after 8 hours of inactivity the sender receives a notice about retention. On request data are erased without delay.
+
+Data subject rights: access, rectification, erasure, restriction, objection, portability, complaint to the Czech Data Protection Authority. Requests: gdpr@hotelchodov.cz.
+
+Processors: Meta Platforms, Inc. (WhatsApp Business API), OpenAI, hosting and IT support providers. Transfers outside the EEA rely on Standard Contractual Clauses.
+
+Security: encrypted transport (TLS), password-protected admin, audit logging, secured Ubuntu server storage.

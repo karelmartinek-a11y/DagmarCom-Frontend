@@ -1,0 +1,10 @@
+Privacy Policy – DagmarCom
+
+1. Controller: Aqua Sport Club s.r.o., ID 27125529, Medrova 169/22, 142 00 Prague 4, Czech Republic.
+2. Data processed: sender phone number, message content, timestamps, response_id, system logs.
+3. Purpose: answering general customer questions for Hotel Chodov ASC via WhatsApp.
+4. Legal basis: legitimate interest (Art. 6(1)(f) GDPR).
+5. Retention: 30 days. After 8 hours of inactivity we send a retention notice. Using the Del URL triggers immediate deletion.
+6. Sharing: WhatsApp API (Meta), OpenAI, hosting providers. Transfers outside the EEA based on Standard Contractual Clauses.
+7. Rights: access, rectification, erasure, restriction, objection, portability. Requests: gdpr@hotelchodov.cz.
+8. Security: TLS transport, password-protected admin, audit logging, scheduled deletion of old records.

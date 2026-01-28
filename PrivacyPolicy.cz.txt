@@ -1,0 +1,10 @@
+Zasady ochrany soukromi – DagmarCom
+
+1. Kdo zpracovava data: Aqua Sport Club s.r.o., IC 27125529, Medrova 169/22, 142 00 Praha 4.
+2. Jaká data: telefonni cislo, obsah zprav, casy, response_id, systemove logy.
+3. Ucel: odpovidani na obecne dotazy zakazniku hotelu Chodov ASC pres WhatsApp.
+4. Pravni zaklad: opravnene zajmy (Art. 6(1)(f) GDPR).
+5. Doba uchovani: 30 dni. Po 8 hodinach bez aktivity odesleme upozorneni na uchovani. Po kliknuti na Del URL data ihned mazeme.
+6. Sdileni: WhatsApp API (Meta), OpenAI, poskytovatele hostingu. Prenos mimo EHP na zaklade Standardnich smluvnich dolozek.
+7. Prava: pristup, oprava, vymaz, omezeni, namitka, prenositelnost. Zadosti: gdpr@hotelchodov.cz.
+8. Bezpecnost: TLS, pristup chraneny heslem, logovani, pravidelne mazani starych zaznamu.

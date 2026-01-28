@@ -1,0 +1,21 @@
+DagmarCom – popis sluzby (CS/EN)
+
+CS:
+- Uzivatel posle zpravu na WhatsApp +420608877424.
+- Meta webhook volá https://api.hcasc.cz/webhook/whatsapp na Ubuntu serveru.
+- Backend prida zpravu do fronty, doplni context/role/instructions/inputSuffix a posle dotaz na OpenAI Responses API 2025 s volbou modelu (bez predchoziho response_id u prvni zpravy).
+- Po obdrzeni odpovedi ulozi nove response_id, doplni vystupni dolozky (outputPrefixFirst/Next/Always) a odešle odpoved zpet na WhatsApp odesilatele.
+- Behem 8 hodin se dalsi zpravy vazou na posledni response_id; pokud dorazi vice zprav pred odpovedi, slouci se do jednoho dotazu.
+- Po 8 hodinach od posledni odpovedi je odeslan GDPR informacni text a vlakno se restartuje (nova konverzace bez response_id).
+- Del URL v notifikaci spousti okamzite smazani dat pro dane cislo.
+- Admin UI na /settings (Basic Auth admin/+Sin8glov8) umoznuje zapnout/vypnout bota, upravit prompt (instructions/role/context/input/output), nastavit OpenAI API key a model, prohlizet logy a stahovat chaty jako .txt.
+
+EN:
+- User sends a WhatsApp message to +420608877424.
+- Meta webhook hits https://api.hcasc.cz/webhook/whatsapp on the Ubuntu server.
+- Backend queues the message, adds context/role/instructions/inputSuffix and calls the OpenAI Responses API 2025 with the selected model (no response_id on the first message).
+- After receiving the answer it stores the new response_id, prepends/appends output clauses (outputPrefixFirst/Next/Always) and sends the reply back to the sender on WhatsApp.
+- Within 8 hours, subsequent messages reuse the last response_id; if multiple messages arrive before a reply, they are merged into one AI request.
+- After 8 hours of inactivity, a GDPR notice is sent and the thread resets (new conversation without response_id).
+- The Del URL in the notice triggers immediate deletion of all data for that phone number.
+- Admin UI at /settings (Basic Auth admin/+Sin8glov8) lets staff enable/disable the bot, edit prompt fields, set OpenAI API key/model, browse logs and download chats as .txt.

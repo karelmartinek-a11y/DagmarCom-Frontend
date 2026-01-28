@@ -1,0 +1,10 @@
+Obchodni podminky – DagmarCom
+
+1. Provozovatel: Aqua Sport Club s.r.o., IC 27125529, Medrova 169/22, 142 00 Praha 4.
+2. Sluzba: informacni linka pro zakazniky hotelu Chodov ASC prostrednictvim WhatsApp. Sluzba neposkytuje rezervace ani pravni/financni rady.
+3. Dostupnost: sluzba je provozovana automaticky; provozovatel nezarucuje nepřetrzitou dostupnost ani odpoved na kazdou zpravu.
+4. Odpovednost: informace jsou pouze informativni. Provozovatel neodpovida za skody vznikle spolehanim se na odpovedi bota. Ubytovaci smlouvy a objednavky vznikaji az potvrzenim recepci.
+5. Cena: sluzba je poskytovana zdarma; standardni poplatky operatora za data/SMS se mohou uplatnit.
+6. Ochrana dat: viz Privacy Policy a GDPR notifikace. Del URL umoznuje okamzity vymaz.
+7. Zmeny podminek: provozovatel muze podminky aktualizovat zverejnenim na api.hcasc.cz/TermsOfService.cz.txt.
+8. Kontakt: recepce@hotelchodov.cz, +420 261 090 900.

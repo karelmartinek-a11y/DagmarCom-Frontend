@@ -1,6 +1,7 @@
 const apiBase = '';
 let authHeader = '';
 let apiKeyVisible = false;
+let cachedModels = [];
 
 function getAuth() {
   const pass = document.getElementById('password').value.trim();
@@ -36,6 +37,9 @@ async function loadSettings() {
         el.value = value || '';
       }
     });
+    if (data.openaiModel) {
+      updateModelSelectValue(data.openaiModel);
+    }
   } catch (e) {
     document.getElementById('loginStatus').textContent = 'Chyba: ' + e.message;
   }
@@ -57,6 +61,50 @@ async function saveSettings() {
   } catch (e) {
     document.getElementById('saveStatus').textContent = 'Chyba: ' + e.message;
   }
+}
+
+function updateModelSelectValue(val) {
+  const select = document.getElementById('modelSelect');
+  if (!select) return;
+  if (val) {
+    const exists = Array.from(select.options).some((o) => o.value === val);
+    if (!exists) {
+      select.add(new Option(val, val), 0);
+    }
+    select.value = val;
+  }
+  const input = document.getElementById('openaiModel');
+  if (input && val) input.value = val;
+}
+
+async function fetchModels() {
+  const key = document.getElementById('openaiApiKey').value.trim();
+  if (!key) {
+    document.getElementById('saveStatus').textContent = 'Zadejte API klic pro nacteni modelu';
+    return;
+  }
+  document.getElementById('saveStatus').textContent = 'Nacitam modely...';
+  try {
+    const resp = await fetch('https://api.openai.com/v1/models', {
+      headers: { Authorization: 'Bearer ' + key },
+    });
+    if (!resp.ok) throw new Error('HTTP ' + resp.status);
+    const data = await resp.json();
+    const models = (data.data || []).map((m) => m.id).filter((id) => id.startsWith('gpt'));
+    cachedModels = models;
+    const select = document.getElementById('modelSelect');
+    select.innerHTML = '';
+    models.forEach((id) => select.add(new Option(id, id)));
+    if (models.length) updateModelSelectValue(models[0]);
+    document.getElementById('saveStatus').textContent = 'Modely nacteny';
+  } catch (e) {
+    document.getElementById('saveStatus').textContent = 'Chyba pri nacitani modelu: ' + e.message;
+  }
+}
+
+function onModelSelectChange() {
+  const val = document.getElementById('modelSelect').value;
+  updateModelSelectValue(val);
 }
 
 async function loadLogs() {
@@ -95,3 +143,6 @@ document.getElementById('saveBtn').addEventListener('click', saveSettings);
 document.getElementById('loadLogs').addEventListener('click', loadLogs);
 document.getElementById('toggleApiKey').addEventListener('click', toggleApiKeyVisibility);
 document.getElementById('deleteApiKey').addEventListener('click', deleteApiKey);
+document.getElementById('loadModels').addEventListener('click', fetchModels);
+document.getElementById('modelSelect').addEventListener('change', onModelSelectChange);
+document.getElementById('saveKeyBtn').addEventListener('click', saveSettings);

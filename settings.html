@@ -18,34 +18,37 @@
     <span id="loginStatus"></span>
   </section>
 
-  <section class="grid">
-    <div class="card">
-      <h2>Automaticke odpovedi</h2>
-      <label><input type="checkbox" id="autoEnabled" /> Zapnout odpovidani</label>
-    </div>
+  <section class="card">
+    <h2>Automaticke odpovedi</h2>
+    <label><input type="checkbox" id="autoEnabled" /> Zapnout odpovidani</label>
+  </section>
 
-    <div class="card">
-      <h2>OpenAI</h2>
-      <label>API klíč
-        <div class="inline-input">
-          <input id="openaiApiKey" type="password" autocomplete="off" />
-          <button type="button" id="toggleApiKey">Zobrazit</button>
-          <button type="button" id="deleteApiKey" class="danger">Smazat</button>
-        </div>
-      </label>
-      <label>Model<input id="openaiModel" placeholder="gpt-4.1" /></label>
+  <section class="card">
+    <h2>OpenAI</h2>
+    <label>API klíč
+      <div class="inline-input">
+        <input id="openaiApiKey" type="password" autocomplete="off" />
+        <button type="button" id="toggleApiKey">Zobrazit</button>
+        <button type="button" id="deleteApiKey" class="danger">Smazat</button>
+        <button type="button" id="saveKeyBtn">Uložit</button>
+      </div>
+    </label>
+    <div class="inline-input">
+      <button type="button" id="loadModels">Načíst modely</button>
+      <select id="modelSelect"></select>
     </div>
+    <label>Model (ruční override)<input id="openaiModel" placeholder="gpt-4.1" /></label>
+  </section>
 
-    <div class="card">
-      <h2>Prompt</h2>
-      <label>Instructions<textarea id="instructions"></textarea></label>
-      <label>Role<textarea id="role"></textarea></label>
-      <label>Context<textarea id="context"></textarea></label>
-      <label>Input suffix<textarea id="inputSuffix"></textarea></label>
-      <label>Output 1. odpoved<textarea id="outputPrefixFirst"></textarea></label>
-      <label>Output dalsi<textarea id="outputPrefixNext"></textarea></label>
-      <label>Output vse<textarea id="outputPrefixAlways"></textarea></label>
-    </div>
+  <section class="card">
+    <h2>Prompt</h2>
+    <label>Instructions<textarea id="instructions"></textarea></label>
+    <label>Role<textarea id="role"></textarea></label>
+    <label>Context<textarea id="context"></textarea></label>
+    <label>Input suffix<textarea id="inputSuffix"></textarea></label>
+    <label>Output 1. odpoved<textarea id="outputPrefixFirst"></textarea></label>
+    <label>Output dalsi<textarea id="outputPrefixNext"></textarea></label>
+    <label>Output vse<textarea id="outputPrefixAlways"></textarea></label>
   </section>
 
   <div class="actions">

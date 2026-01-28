@@ -31,12 +31,6 @@ p { color: var(--muted); }
   box-shadow: var(--shadow);
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 12px;
-}
-
 label { display: block; margin: 8px 0; font-weight: 600; }
 input, textarea, button {
   width: 100%;

@@ -57,6 +57,13 @@ button:active { transform: translateY(0); }
 .filters { display: flex; gap: 8px; flex-wrap: wrap; }
 .inline-input { display: flex; gap: 6px; align-items: center; }
 .inline-input input { flex: 2.2; min-width: 420px; }
+.status-row { display: flex; align-items: center; gap: 8px; margin: 6px 0; }
+.lamp { width: 16px; height: 16px; border-radius: 50%; background: #adb5bd; box-shadow: 0 0 6px rgba(0,0,0,0.2); }
+.lamp.ok { background: #2b8a3e; }
+.lamp.warn { background: #f59f00; }
+.lamp.err { background: #c92a2a; }
+.logblock { margin-bottom: 12px; }
+.logblock pre { background: #0b1021; color: #cde5ff; padding: 10px; border-radius: 8px; min-height: 60px; overflow: auto; }
 
 @media (max-width: 640px) {
   body { padding: 16px; }

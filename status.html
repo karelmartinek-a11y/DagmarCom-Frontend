@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <title>DagmarCom – Status</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>DagmarCom – Status dashboard</h1>
+    <p>Rychly prehled funkcnosti WhatsApp bota a napojeni na OpenAI.</p>
+  </header>
+
+  <section class="card">
+    <h2>Prihlaseni</h2>
+    <label>Heslo (Basic Auth): <input id="password" type="password" placeholder="zadejte heslo" autocomplete="off" /></label>
+    <button id="loadStatus">Nacist status</button>
+    <span id="statusInfo"></span>
+  </section>
+
+  <section class="card" id="summary">
+    <h2>Semafory</h2>
+    <div class="status-row">
+      <div class="lamp" id="lampApiKey"></div><span>OpenAI API klíč</span>
+    </div>
+    <div class="status-row">
+      <div class="lamp" id="lampWhatsApp"></div><span>WhatsApp konfigurace</span>
+    </div>
+    <div class="status-row">
+      <div class="lamp" id="lampDB"></div><span>Databáze (SQLite)</span>
+    </div>
+    <div class="status-row">
+      <div class="lamp" id="lampSystem"></div><span>Ubuntu dostupnost (proces běží)</span>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Poslední události</h2>
+    <div class="logblock">
+      <strong>Poslední příjem z WhatsApp:</strong>
+      <pre id="lastIn">(není)</pre>
+    </div>
+    <div class="logblock">
+      <strong>Poslední odeslání na WhatsApp:</strong>
+      <pre id="lastOut">(není)</pre>
+    </div>
+    <div class="logblock">
+      <strong>Poslední OpenAI request:</strong>
+      <pre id="lastOAReq">(není)</pre>
+    </div>
+    <div class="logblock">
+      <strong>Poslední OpenAI response:</strong>
+      <pre id="lastOARes">(není)</pre>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Testy</h2>
+    <div class="actions">
+      <button id="testWA">Otestovat WhatsApp API</button>
+      <button id="testOA">Otestovat OpenAI API</button>
+    </div>
+    <pre id="testOutput">(výstup testů)</pre>
+  </section>
+
+  <section class="card actions">
+    <button id="exitBtn">Exit</button>
+  </section>
+
+  <script src="status.js"></script>
+</body>
+</html>

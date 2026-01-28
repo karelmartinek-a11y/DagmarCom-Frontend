@@ -13,7 +13,7 @@
 
   <section class="card">
     <h2>Prihlaseni</h2>
-    <label>Heslo (Basic Auth): <input id="password" type="password" placeholder="+Sin8glov8" /></label>
+    <label>Heslo (Basic Auth): <input id="password" type="password" placeholder="zadejte heslo" autocomplete="off" /></label>
     <button id="loadSettings">Nacist nastaveni</button>
     <span id="loginStatus"></span>
   </section>
@@ -26,7 +26,13 @@
 
     <div class="card">
       <h2>OpenAI</h2>
-      <label>API klíč<input id="openaiApiKey" type="password" /></label>
+      <label>API klíč
+        <div class="inline-input">
+          <input id="openaiApiKey" type="password" autocomplete="off" />
+          <button type="button" id="toggleApiKey">Zobrazit</button>
+          <button type="button" id="deleteApiKey" class="danger">Smazat</button>
+        </div>
+      </label>
       <label>Model<input id="openaiModel" placeholder="gpt-4.1" /></label>
     </div>
 

@@ -1,8 +1,10 @@
 const apiBase = '';
 let authHeader = '';
+let apiKeyVisible = false;
 
 function getAuth() {
-  const pass = document.getElementById('password').value || '+Sin8glov8';
+  const pass = document.getElementById('password').value.trim();
+  if (!pass) throw new Error('Zadejte heslo pro Basic Auth.');
   authHeader = 'Basic ' + btoa(`admin:${pass}`);
 }
 
@@ -75,6 +77,21 @@ async function loadLogs() {
   }
 }
 
+function toggleApiKeyVisibility() {
+  const field = document.getElementById('openaiApiKey');
+  apiKeyVisible = !apiKeyVisible;
+  field.type = apiKeyVisible ? 'text' : 'password';
+  document.getElementById('toggleApiKey').textContent = apiKeyVisible ? 'Skrýt' : 'Zobrazit';
+}
+
+async function deleteApiKey() {
+  document.getElementById('openaiApiKey').value = '';
+  document.getElementById('saveStatus').textContent = 'Mazani...';
+  await saveSettings();
+}
+
 document.getElementById('loadSettings').addEventListener('click', loadSettings);
 document.getElementById('saveBtn').addEventListener('click', saveSettings);
 document.getElementById('loadLogs').addEventListener('click', loadLogs);
+document.getElementById('toggleApiKey').addEventListener('click', toggleApiKeyVisibility);
+document.getElementById('deleteApiKey').addEventListener('click', deleteApiKey);

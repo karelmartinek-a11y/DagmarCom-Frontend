@@ -54,12 +54,15 @@ button {
   border: none;
   transition: transform 0.1s ease, box-shadow 0.2s ease;
 }
+button.danger { background: #c92a2a; }
 button:hover { box-shadow: var(--shadow); transform: translateY(-1px); }
 button:active { transform: translateY(0); }
 
 .actions { display: flex; gap: 10px; align-items: center; }
 #logOutput { background: #0b1021; color: #cde5ff; min-height: 180px; padding: 12px; border-radius: var(--radius); overflow: auto; }
 .filters { display: flex; gap: 8px; flex-wrap: wrap; }
+.inline-input { display: flex; gap: 6px; align-items: center; }
+.inline-input input { flex: 1; }
 
 @media (max-width: 640px) {
   body { padding: 16px; }

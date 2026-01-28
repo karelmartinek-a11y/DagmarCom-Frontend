@@ -48,7 +48,26 @@ async function loadSettings() {
 async function saveSettings() {
   try {
     const payload = {};
-    ['autoEnabled', 'instructions', 'role', 'context', 'inputSuffix', 'outputPrefixFirst', 'outputPrefixNext', 'outputPrefixAlways', 'openaiApiKey', 'openaiModel'].forEach(
+    [
+      'autoEnabled',
+      'instructionsFirst',
+      'instructionsNext',
+      'instructionsAlways',
+      'roleFirst',
+      'roleNext',
+      'roleAlways',
+      'contextFirst',
+      'contextNext',
+      'contextAlways',
+      'inputSuffixFirst',
+      'inputSuffixNext',
+      'inputSuffixAlways',
+      'outputPrefixFirst',
+      'outputPrefixNext',
+      'outputPrefixAlways',
+      'openaiApiKey',
+      'openaiModel',
+    ].forEach(
       (id) => {
         const el = document.getElementById(id);
         if (!el) return;

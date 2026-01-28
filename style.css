@@ -64,6 +64,9 @@ button:active { transform: translateY(0); }
 .lamp.err { background: #c92a2a; }
 .logblock { margin-bottom: 12px; }
 .logblock pre { background: #0b1021; color: #cde5ff; padding: 10px; border-radius: 8px; min-height: 60px; overflow: auto; }
+.two-col { display: grid; grid-template-columns: 2fr 1fr; gap: 12px; }
+.col-wide { min-height: 100%; }
+.col-narrow { min-height: 100%; }
 
 @media (max-width: 640px) {
   body { padding: 16px; }

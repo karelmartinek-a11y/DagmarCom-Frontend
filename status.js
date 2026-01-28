@@ -49,6 +49,7 @@ async function loadStatus() {
     document.getElementById('lastOut').textContent = fmt(data.lastOutbound);
     document.getElementById('lastOAReq').textContent = fmt(data.lastOpenAIRequest);
     document.getElementById('lastOARes').textContent = fmt(data.lastOpenAIResponse);
+    document.getElementById('previewProdMsg').textContent = fmt(data.lastInbound || data.lastOutbound);
   } catch (e) {
     document.getElementById('statusInfo').textContent = 'Chyba: ' + e.message;
   }

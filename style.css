@@ -62,7 +62,7 @@ button:active { transform: translateY(0); }
 #logOutput { background: #0b1021; color: #cde5ff; min-height: 180px; padding: 12px; border-radius: var(--radius); overflow: auto; }
 .filters { display: flex; gap: 8px; flex-wrap: wrap; }
 .inline-input { display: flex; gap: 6px; align-items: center; }
-.inline-input input { flex: 1; }
+.inline-input input { flex: 2.2; min-width: 420px; }
 
 @media (max-width: 640px) {
   body { padding: 16px; }

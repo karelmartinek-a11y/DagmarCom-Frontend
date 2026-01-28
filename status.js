@@ -83,6 +83,11 @@ async function sendWA() {
       document.getElementById('sendWAResult').textContent = 'Zadejte telefon i text.';
       return;
     }
+    if (!/^[1-9][0-9]{7,14}$/.test(phone)) {
+      document.getElementById('sendWAResult').textContent =
+        'Telefon musi byt bez +, jen cislice, 8–15 znaků. Např. 420603123456.';
+      return;
+    }
     document.getElementById('sendWAResult').textContent = 'Odesilam...';
     const data = await fetchJson('/api/status/test/whatsapp/send', {
       method: 'POST',

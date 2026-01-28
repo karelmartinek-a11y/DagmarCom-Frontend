@@ -43,6 +43,8 @@ async function loadStatus() {
     setLamp('lampWhatsApp', data.whatsappSet ? 'ok' : 'err');
     setLamp('lampDB', data.dbOk ? 'ok' : 'err');
     setLamp('lampSystem', 'ok');
+    const hasErrors = (data.recentErrors || []).length > 0;
+    setLamp('lampErrors', hasErrors ? 'err' : 'ok');
     document.getElementById('lastIn').textContent = fmt(data.lastInbound);
     document.getElementById('lastOut').textContent = fmt(data.lastOutbound);
     document.getElementById('lastOAReq').textContent = fmt(data.lastOpenAIRequest);

@@ -2,110 +2,176 @@
 <html lang="cs">
 <head>
   <meta charset="UTF-8" />
-  <title>DagmarCom – Nastaveni</title>
+  <title>DagmarCom – Nastavení</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>
-    <h1>DagmarCom – Nastaveni</h1>
-    <p>Rozhrani pro spravu automatickych odpovedi na WhatsApp cisle +420608877424.</p>
-  </header>
-
-  <section class="card">
-    <h2>Prihlaseni</h2>
-    <label>Heslo (Basic Auth): <input id="password" type="password" placeholder="zadejte heslo" autocomplete="off" /></label>
-    <button id="loadSettings">Nacist nastaveni</button>
-    <span id="loginStatus"></span>
-  </section>
-
-  <section class="card">
-    <h2>Automaticke odpovedi</h2>
-    <label><input type="checkbox" id="autoEnabled" /> Zapnout odpovidani</label>
-  </section>
-
-  <section class="card">
-    <h2>OpenAI</h2>
-    <label>API klíč
-      <div class="inline-input">
-        <input id="openaiApiKey" type="password" autocomplete="off" />
-        <button type="button" id="toggleApiKey">Zobrazit</button>
-        <button type="button" id="deleteApiKey" class="danger">Smazat</button>
-        <button type="button" id="saveKeyBtn">Uložit</button>
-      </div>
-    </label>
+  <section class="card login-box" id="loginPanel">
+    <div class="hero">
+      <h1>DagmarCom – Nastavení</h1>
+      <p>Správa promptů, kanálů WhatsApp/E-mail a klíčů. Nejprve se přihlaste.</p>
+    </div>
     <div class="inline-input">
-      <button type="button" id="loadModels">Načíst modely</button>
-      <select id="modelSelect"></select>
+      <input id="username" class="input-lg" value="provoz@hotelchodovasc.cz" />
+      <input id="password" class="input-lg" type="password" placeholder="Heslo" autocomplete="off" />
+      <button id="loginBtn" class="input-lg" type="button">Přihlásit</button>
+      <button id="resetBtn" type="button" class="secondary">Zaslat reset link</button>
     </div>
-    <label>Model (ruční override)<input id="openaiModel" placeholder="gpt-4.1" /></label>
-  </section>
-
-  <section class="card">
-    <h2>Email (recepce@hotelchodovasc.cz)</h2>
-    <label><input type="checkbox" id="emailAutoEnabled" /> Zapnout emailové odpovědi</label>
-    <label>Režim odeslání
-      <select id="emailSendMode">
-        <option value="draft">Uložit do konceptů</option>
-        <option value="send">Odeslat ihned</option>
-      </select>
-    </label>
-    <label>IMAP host<input id="imapHost" /></label>
-    <label>IMAP port<input id="imapPort" type="number" value="993" /></label>
-    <label>IMAP user<input id="imapUser" /></label>
-    <label>IMAP pass<input id="imapPass" type="password" autocomplete="off" /></label>
-    <label>Složka INBOX<input id="imapInbox" placeholder="INBOX" /></label>
-    <label>Složka SPAM<input id="imapSpam" placeholder="SPAM" /></label>
-    <label>Složka Drafts<input id="imapDrafts" placeholder="Drafts" /></label>
-
-    <label>SMTP host<input id="smtpHost" /></label>
-    <label>SMTP port<input id="smtpPort" type="number" value="587" /></label>
-    <label>SMTP user<input id="smtpUser" /></label>
-    <label>SMTP pass<input id="smtpPass" type="password" autocomplete="off" /></label>
-
-    <div class="actions">
-      <button id="testEmail">Otestovat IMAP/SMTP</button>
-      <button id="runEmailNow">Spustit zpracování inboxu</button>
-      <span id="emailStatus"></span>
+    <div class="inline-input">
+      <input id="resetToken" class="input-lg" placeholder="Reset token (z e-mailu)" autocomplete="off" />
+      <input id="newPassword" class="input-lg" type="password" placeholder="Nové heslo" autocomplete="off" />
+      <button id="applyResetBtn" type="button" class="secondary">Nastavit nové heslo</button>
     </div>
+    <p class="muted">Reset link je platný 1 hodinu. Token vložte do pole výše a nastavte nové heslo.</p>
+    <span id="status"></span>
   </section>
 
-  <section class="card">
-    <h2>Prompt</h2>
-    <label>Instructions – 1. odpoved<textarea id="instructionsFirst"></textarea></label>
-    <label>Instructions – dalsi odpoved<textarea id="instructionsNext"></textarea></label>
-    <label>Instructions – vzdy<textarea id="instructionsAlways"></textarea></label>
+  <div id="appContent" class="hidden">
+    <header>
+      <h1>DagmarCom – Panel nastavení</h1>
+      <p class="muted">Všechny položky odpovídají závaznému vzoru requestu (instructions → developer role → context → input suffix → output prefix).</p>
+    </header>
 
-    <label>Role – 1. odpoved<textarea id="roleFirst"></textarea></label>
-    <label>Role – dalsi odpoved<textarea id="roleNext"></textarea></label>
-    <label>Role – vzdy<textarea id="roleAlways"></textarea></label>
+    <section class="card panel">
+      <h2>OpenAI API key</h2>
+      <div class="stack">
+        <input id="openaiApiKey" class="input-lg full" type="password" placeholder="API key" autocomplete="off" />
+        <div class="actions wrap">
+          <button id="toggleApiKey" type="button">Zobrazit uložený klíč</button>
+          <button id="saveKeyBtn" type="button">Uložit API key</button>
+          <button id="loadSettings" type="button">Načíst nastavení</button>
+        </div>
+        <div class="inline-input">
+          <input id="openaiModel" class="input-lg" placeholder="gpt-4.1" />
+          <button id="loadModels" type="button">Modely</button>
+          <select id="modelSelect"></select>
+        </div>
+        <div class="actions wrap">
+          <button id="testOpenAI" type="button">Otestovat OpenAI</button>
+          <span id="openaiStatus"></span>
+        </div>
+      </div>
+    </section>
 
-    <label>Context – 1. odpoved<textarea id="contextFirst"></textarea></label>
-    <label>Context – dalsi odpoved<textarea id="contextNext"></textarea></label>
-    <label>Context – vzdy<textarea id="contextAlways"></textarea></label>
+    <section class="card panel">
+      <h2>E-mail (IMAP / SMTP)</h2>
+      <div class="toggle-row">
+        <div class="group">
+          <label><input type="checkbox" id="emailAutoEnabled" /> Zapnout automatické e‑mail odpovědi</label>
+        </div>
+        <div class="group">
+          <label><input type="radio" name="emailSendMode" value="draft" checked /> Ukládat do konceptů</label>
+          <label><input type="radio" name="emailSendMode" value="send" /> Odesílat hned</label>
+        </div>
+      </div>
+      <div class="grid-3">
+        <label>IMAP host<input id="imapHost" class="input-lg" placeholder="imap.hotel.cz" /></label>
+        <label>IMAP port<input id="imapPort" class="input-lg" placeholder="993" /></label>
+        <label>IMAP user<input id="imapUser" class="input-lg" placeholder="recepce@hotel..." /></label>
+        <label>IMAP heslo<input id="imapPass" class="input-lg" type="password" /></label>
+        <label>SMTP host<input id="smtpHost" class="input-lg" placeholder="smtp.hotel.cz" /></label>
+        <label>SMTP port<input id="smtpPort" class="input-lg" placeholder="587" /></label>
+        <label>SMTP user<input id="smtpUser" class="input-lg" placeholder="recepce@hotel..." /></label>
+        <label>SMTP heslo<input id="smtpPass" class="input-lg" type="password" /></label>
+      </div>
+      <h4>POP3 (volitelně)</h4>
+      <div class="grid-3">
+        <label>POP3 host<input id="pop3Host" class="input-lg" /></label>
+        <label>POP3 port<input id="pop3Port" class="input-lg" /></label>
+        <label>POP3 user<input id="pop3User" class="input-lg" /></label>
+        <label>POP3 heslo<input id="pop3Pass" class="input-lg" type="password" /></label>
+        <label><input type="checkbox" id="pop3UseSsl" /> POP3 přes SSL</label>
+      </div>
+      <h4>Složky IMAP</h4>
+      <div class="select-row">
+        <label>Složka INBOX<select id="imapInbox"></select></label>
+        <label>Složka SPAM<select id="imapSpam"></select></label>
+        <label>Složka DRAFTS<select id="imapDrafts"></select></label>
+        <label>Složka SENT<select id="imapSent"></select></label>
+      </div>
+      <div class="actions wrap">
+        <button id="loadFolders" type="button">Načíst složky IMAP</button>
+        <button id="testEmail" type="button">Test připojení</button>
+        <div class="inline-input">
+          <input id="resetTestEmail" class="input-lg" placeholder="E-mail pro test resetu (volitelné)" />
+          <button id="testResetEmail" type="button" class="secondary">Test reset e‑mailu</button>
+        </div>
+        <button id="saveSettings" type="button">Uložit e‑mail nastavení</button>
+      </div>
+      <pre id="emailStatus" class="log-scroller mono"></pre>
+    </section>
 
-    <label>Input suffix – 1. odpoved<textarea id="inputSuffixFirst"></textarea></label>
-    <label>Input suffix – dalsi odpoved<textarea id="inputSuffixNext"></textarea></label>
-    <label>Input suffix – vzdy<textarea id="inputSuffixAlways"></textarea></label>
+    <section class="card panel">
+      <h2>Prompt vrstvy</h2>
+      <div class="grid-2">
+        <div class="panel">
+          <h3>Instructions</h3>
+          <div class="field-row"><label>1. odpověď<textarea id="instructionsFirst" class="textarea-lg autosave"></textarea></label><button class="clear-btn" data-clear="instructionsFirst">Smazat</button></div>
+          <div class="field-row"><label>Další odpovědi<textarea id="instructionsNext" class="textarea-lg autosave"></textarea></label><button class="clear-btn" data-clear="instructionsNext">Smazat</button></div>
+          <div class="field-row"><label>Vždy<textarea id="instructionsAlways" class="textarea-lg autosave"></textarea></label><button class="clear-btn" data-clear="instructionsAlways">Smazat</button></div>
+        </div>
+        <div class="panel">
+          <h3>Role (developer)</h3>
+          <div class="field-row"><label>1. odpověď<textarea id="roleFirst" class="textarea-lg autosave"></textarea></label><button class="clear-btn" data-clear="roleFirst">Smazat</button></div>
+          <div class="field-row"><label>Další odpovědi<textarea id="roleNext" class="textarea-lg autosave"></textarea></label><button class="clear-btn" data-clear="roleNext">Smazat</button></div>
+          <div class="field-row"><label>Vždy<textarea id="roleAlways" class="textarea-lg autosave"></textarea></label><button class="clear-btn" data-clear="roleAlways">Smazat</button></div>
+        </div>
+      </div>
+      <div class="grid-2">
+        <div class="panel">
+          <h3>Context + dotaz (user)</h3>
+          <div class="field-row"><label>1. odpověď<textarea id="contextFirst" class="textarea-lg autosave"></textarea></label><button class="clear-btn" data-clear="contextFirst">Smazat</button></div>
+          <div class="field-row"><label>Další odpovědi<textarea id="contextNext" class="textarea-lg autosave"></textarea></label><button class="clear-btn" data-clear="contextNext">Smazat</button></div>
+          <div class="field-row"><label>Vždy<textarea id="contextAlways" class="textarea-lg autosave"></textarea></label><button class="clear-btn" data-clear="contextAlways">Smazat</button></div>
+        </div>
+        <div class="panel">
+          <h3>Input suffix</h3>
+          <div class="field-row"><label>1. odpověď<textarea id="inputSuffixFirst" class="textarea-lg autosave"></textarea></label><button class="clear-btn" data-clear="inputSuffixFirst">Smazat</button></div>
+          <div class="field-row"><label>Další odpovědi<textarea id="inputSuffixNext" class="textarea-lg autosave"></textarea></label><button class="clear-btn" data-clear="inputSuffixNext">Smazat</button></div>
+          <div class="field-row"><label>Vždy<textarea id="inputSuffixAlways" class="textarea-lg autosave"></textarea></label><button class="clear-btn" data-clear="inputSuffixAlways">Smazat</button></div>
+        </div>
+      </div>
+    </section>
 
-    <label>Output 1. odpoved<textarea id="outputPrefixFirst"></textarea></label>
-    <label>Output dalsi<textarea id="outputPrefixNext"></textarea></label>
-    <label>Output vse<textarea id="outputPrefixAlways"></textarea></label>
-  </section>
+    <section class="card panel">
+      <h2>Output prefix (doložka k odpovědi)</h2>
+      <div class="grid-2">
+        <div class="field-row"><label>1. odpověď (6a)<textarea id="outputPrefixFirst" class="textarea-lg autosave"></textarea></label><button class="clear-btn" data-clear="outputPrefixFirst">Smazat</button></div>
+        <div class="field-row"><label>Další odpovědi (6b)<textarea id="outputPrefixNext" class="textarea-lg autosave"></textarea></label><button class="clear-btn" data-clear="outputPrefixNext">Smazat</button></div>
+        <div class="field-row"><label>Vždy (6c)<textarea id="outputPrefixAlways" class="textarea-lg autosave"></textarea></label><button class="clear-btn" data-clear="outputPrefixAlways">Smazat</button></div>
+      </div>
+      <div class="actions">
+        <button id="saveSettings" type="button">Uložit prompty</button>
+      </div>
+    </section>
 
-  <div class="actions">
-    <button id="saveBtn">Ulozit</button>
-    <span id="saveStatus"></span>
+    <section class="card panel">
+      <h2>WhatsApp</h2>
+      <label><input type="checkbox" id="autoEnabled" /> Automatické WhatsApp odpovědi</label>
+      <div class="grid-2">
+        <div>
+          <label>Telefon<input id="waPhone" class="input-lg" placeholder="420603123456" /></label>
+        </div>
+        <div>
+          <label>Text zprávy<textarea id="waText" class="textarea-lg" placeholder="Testovací zpráva"></textarea></label>
+        </div>
+      </div>
+      <div class="actions">
+        <button id="sendWA" type="button">Poslat test</button>
+        <pre id="waResult" class="log-scroller mono w100"></pre>
+      </div>
+    </section>
+
+    <section class="card panel">
+      <h2>Logy</h2>
+      <div class="filters">
+        <input id="filterPhone" placeholder="Telefon" />
+        <input id="filterText" placeholder="Fulltext" />
+        <button id="loadLogs" type="button">Vyhledat</button>
+      </div>
+      <pre id="logOutput" class="log-scroller mono"></pre>
+    </section>
   </div>
-
-  <section class="card">
-    <h2>Logy</h2>
-    <div class="filters">
-      <input id="filterPhone" placeholder="Telefon" />
-      <input id="filterText" placeholder="Fulltext" />
-      <button id="loadLogs">Vyhledat</button>
-    </div>
-    <pre id="logOutput">(zatim nic)</pre>
-  </section>
 
   <script src="settings.js"></script>
 </body>

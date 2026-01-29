@@ -1,0 +1,43 @@
+name: CI/CD
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Basic checks
+        run: |
+          test -f settings.html
+          test -f status.html
+          test -f settings.js
+          test -f status.js
+          test -f style.css
+
+  deploy:
+    needs: build
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to production server
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          password: ${{ secrets.DEPLOY_PASS }}
+          script: |
+            set -e
+            if [ ! -d /srv/hcas/_repos/dagmarcom-frontend/.git ]; then
+              git clone https://github.com/karelmartinek-a11y/DagmarCom-Frontend.git /srv/hcas/_repos/dagmarcom-frontend
+            fi
+            cd /srv/hcas/_repos/dagmarcom-frontend
+            git fetch origin main
+            git checkout main
+            git reset --hard origin/main
+            rsync -a --delete --exclude='.git' /srv/hcas/_repos/dagmarcom-frontend/ /opt/dagmarcom/frontend/
+            rsync -a --delete --exclude='.git' /srv/hcas/_repos/dagmarcom-frontend/ /var/www/api.hcasc.cz/
+            mkdir -p /var/log/api-hcasc
+            printf '%s DagmarCom frontend: auto-deploy main\n' "$(date '+%F %T')" >> /var/log/api-hcasc/deploy.log

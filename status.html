@@ -6,63 +6,65 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>
-    <h1>DagmarCom – Status dashboard</h1>
-    <p>Rychly prehled funkcnosti WhatsApp bota a napojeni na OpenAI.</p>
-  </header>
-
-  <section class="card">
-    <h2>Prihlaseni</h2>
-    <label>Heslo (Basic Auth): <input id="password" type="password" placeholder="zadejte heslo" autocomplete="off" /></label>
-    <button id="loadStatus">Nacist status</button>
+  <section class="card login-box" id="loginPanel">
+    <div class="hero">
+      <h1>DagmarCom – Status</h1>
+      <p>Přehled provozu WhatsApp / OpenAI / E-mail. Nejprve se přihlaste.</p>
+    </div>
+    <div class="inline-input">
+      <input id="username" class="input-lg" value="provoz@hotelchodovasc.cz" />
+      <input id="password" class="input-lg" type="password" placeholder="Heslo" autocomplete="off" />
+      <button id="loadStatus" class="input-lg">Přihlásit</button>
+      <button id="resetBtn" type="button" class="secondary">Zaslat reset link</button>
+    </div>
+    <div class="inline-input">
+      <input id="resetToken" class="input-lg" placeholder="Reset token (z e-mailu)" autocomplete="off" />
+      <input id="newPassword" class="input-lg" type="password" placeholder="Nové heslo" autocomplete="off" />
+      <button id="applyResetBtn" type="button" class="secondary">Nastavit nové heslo</button>
+    </div>
+    <p class="muted">Reset link je platný 1 hodinu. Token vložte do pole výše a nastavte nové heslo.</p>
     <span id="statusInfo"></span>
   </section>
 
+  <div id="appContent" class="hidden">
+    <section class="card" id="activityCard">
+      <h2>Aktuální stav</h2>
+      <p class="muted">Živé dění posledních operací (e-maily, WhatsApp, OpenAI). Aktualizuje se načtením statusu.</p>
+      <pre id="activityLog" class="log-scroller mono" style="max-height:220px; min-height:140px;"></pre>
+    </section>
+
+    <header>
+      <h1>DagmarCom – Status dashboard</h1>
+      <p>Přehled stavu WhatsApp bota, e‑mailu a napojení na OpenAI.</p>
+    </header>
+
   <section class="card" id="summary">
     <h2>Semafory</h2>
-    <div class="status-row">
-      <div class="lamp" id="lampApiKey"></div><span>OpenAI API klíč</span>
-    </div>
-    <div class="status-row">
-      <div class="lamp" id="lampWhatsApp"></div><span>WhatsApp konfigurace</span>
-    </div>
-    <div class="status-row">
-      <div class="lamp" id="lampDB"></div><span>Databáze (SQLite)</span>
-    </div>
-    <div class="status-row">
-      <div class="lamp" id="lampSystem"></div><span>Ubuntu dostupnost (proces běží)</span>
-    </div>
-    <div class="status-row">
-      <div class="lamp" id="lampErrors"></div><span>Recentní chyby OpenAI/response_id</span>
-    </div>
+    <div class="status-row"><div class="lamp" id="lampApiKey"></div><span>OpenAI API klíč</span></div>
+    <div class="status-row"><div class="lamp" id="lampWhatsApp"></div><span>WhatsApp konfigurace</span></div>
+    <div class="status-row"><div class="lamp" id="lampEmail"></div><span>E-mail konfigurace</span></div>
+    <div class="status-row"><div class="lamp" id="lampResetEmail"></div><span>Reset e‑mail (SMTP pro token)</span></div>
+    <div class="status-row"><div class="lamp" id="lampDB"></div><span>Databáze (SQLite)</span></div>
+    <div class="status-row"><div class="lamp" id="lampSystem"></div><span>Proces běží</span></div>
+    <div class="status-row"><div class="lamp" id="lampErrors"></div><span>Recentní chyby</span></div>
   </section>
 
   <section class="card">
     <h2>Poslední události</h2>
-    <div class="two-col">
-      <div class="col col-wide">
-        <div class="logblock">
-          <strong>Poslední příjem z WhatsApp:</strong>
-          <pre id="lastIn">(není)</pre>
-        </div>
-        <div class="logblock">
-          <strong>Poslední odeslání na WhatsApp:</strong>
-          <pre id="lastOut">(není)</pre>
-        </div>
-        <div class="logblock">
-          <strong>Poslední OpenAI request:</strong>
-          <pre id="lastOAReq">(není)</pre>
-        </div>
-        <div class="logblock">
-          <strong>Poslední OpenAI response:</strong>
-          <pre id="lastOARes">(není)</pre>
-        </div>
+    <div class="grid-2">
+      <div class="panel">
+        <h3>Surové záznamy (JSON)</h3>
+        <div class="logblock"><strong>WhatsApp IN</strong><pre id="lastIn" class="scroll mono">(není)</pre></div>
+        <div class="logblock"><strong>WhatsApp OUT</strong><pre id="lastOut" class="scroll mono">(není)</pre></div>
+        <div class="logblock"><strong>OpenAI request</strong><pre id="lastOAReq" class="scroll mono">(není)</pre></div>
+        <div class="logblock"><strong>OpenAI response</strong><pre id="lastOARes" class="scroll mono">(není)</pre></div>
       </div>
-      <div class="col col-narrow">
-        <div class="logblock">
-          <strong>Náhled poslední produkční zprávy</strong>
-          <pre id="previewProdMsg">(není)</pre>
-        </div>
+      <div class="panel">
+        <h3>Textový náhled (bez JSON)</h3>
+        <div class="logblock"><strong>Poslední dotaz</strong><pre id="lastTextIn" class="scroll pre-wrap">(není)</pre></div>
+        <div class="logblock"><strong>Odpověď odeslaná</strong><pre id="lastTextOut" class="scroll pre-wrap">(není)</pre></div>
+        <div class="logblock"><strong>OpenAI vstup</strong><pre id="lastTextOAIn" class="scroll pre-wrap">(není)</pre></div>
+        <div class="logblock"><strong>OpenAI výstup</strong><pre id="lastTextOAOut" class="scroll pre-wrap">(není)</pre></div>
       </div>
     </div>
   </section>
@@ -78,9 +80,9 @@
 
   <section class="card">
     <h2>Odeslat testovací WhatsApp zprávu</h2>
-    <label>Telefon (včetně predvolby, bez +): <input id="waPhone" placeholder="420603123456" /></label>
-    <label>Text zprávy:<textarea id="waText" placeholder="Test zprava"></textarea></label>
-    <button id="sendWA">Odeslat na WhatsApp</button>
+    <label>Telefon (včetně předvolby, bez +): <input id="waPhone" placeholder="420603123456" /></label>
+    <label>Text zprávy:<textarea id="waText" placeholder="Test zpráva"></textarea></label>
+    <button id="sendWA">Odeslat</button>
     <pre id="sendWAResult">(výsledek)</pre>
   </section>
 
@@ -89,5 +91,6 @@
   </section>
 
   <script src="status.js"></script>
+  </div>
 </body>
 </html>

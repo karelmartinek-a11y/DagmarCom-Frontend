@@ -31,14 +31,14 @@ jobs:
           password: ${{ secrets.DEPLOY_PASS }}
           script: |
             set -e
-            if [ ! -d /srv/hcas/_repos/dagmarcom-frontend/.git ]; then
-              git clone https://github.com/karelmartinek-a11y/DagmarCom-Frontend.git /srv/hcas/_repos/dagmarcom-frontend
+            if [ ! -d /srv/hcasc/_repos/dagmarcom-frontend/.git ]; then
+              git clone https://github.com/karelmartinek-a11y/DagmarCom-Frontend.git /srv/hcasc/_repos/dagmarcom-frontend
             fi
-            cd /srv/hcas/_repos/dagmarcom-frontend
+            cd /srv/hcasc/_repos/dagmarcom-frontend
             git fetch origin main
             git checkout main
             git reset --hard origin/main
-            rsync -a --delete --exclude='.git' /srv/hcas/_repos/dagmarcom-frontend/ /opt/dagmarcom/frontend/
-            rsync -a --delete --exclude='.git' /srv/hcas/_repos/dagmarcom-frontend/ /var/www/api.hcasc.cz/
+            rsync -a --delete --exclude='.git' /srv/hcasc/_repos/dagmarcom-frontend/ /opt/dagmarcom/frontend/
+            rsync -a --delete --exclude='.git' /srv/hcasc/_repos/dagmarcom-frontend/ /var/www/api.hcasc.cz/
             mkdir -p /var/log/api-hcasc
             printf '%s DagmarCom frontend: auto-deploy main\n' "$(date '+%F %T')" >> /var/log/api-hcasc/deploy.log

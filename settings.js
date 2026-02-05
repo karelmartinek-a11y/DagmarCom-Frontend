@@ -279,6 +279,18 @@ async function testResetEmail() {
   }
 }
 
+async function saveWhatsAppSettings() {
+  try {
+    getAuth();
+    setStatus('Ukladam WhatsApp...');
+    const payload = { autoEnabled: document.getElementById('autoEnabled').checked };
+    await fetchJson('/api/settings', { method: 'POST', body: JSON.stringify(payload) });
+    setStatus('WhatsApp ulozen');
+  } catch (e) {
+    setStatus('Chyba: ' + e.message);
+  }
+}
+
 async function sendWA() {
   try {
     getAuth();
@@ -398,6 +410,7 @@ window.addEventListener('DOMContentLoaded', () => {
   document.getElementById('loadModels').addEventListener('click', loadModels);
   document.getElementById('modelSelect').addEventListener('change', onModelSelectChange);
   document.getElementById('testOpenAI').addEventListener('click', testOpenAI);
+  document.getElementById('saveWhatsApp').addEventListener('click', saveWhatsAppSettings);
   document.getElementById('sendWA').addEventListener('click', sendWA);
   document.getElementById('loadLogs').addEventListener('click', loadLogs);
   attachAutosave();

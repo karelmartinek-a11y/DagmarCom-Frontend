@@ -31,13 +31,14 @@ jobs:
           password: ${{ secrets.DEPLOY_PASS }}
           script: |
             set -e
+            SSH_CMD="ssh -i /root/.ssh/deploy_dagmarcom_frontend -o IdentitiesOnly=yes"
             if [ ! -d /srv/hcasc/_repos/dagmarcom-frontend/.git ]; then
-              git clone https://github.com/karelmartinek-a11y/DagmarCom-Frontend.git /srv/hcasc/_repos/dagmarcom-frontend
+              GIT_SSH_COMMAND="$SSH_CMD" git clone git@github.com:karelmartinek-a11y/dagmarcom-frontend.git /srv/hcasc/_repos/dagmarcom-frontend
             fi
             cd /srv/hcasc/_repos/dagmarcom-frontend
-            git fetch origin main
-            git checkout main
-            git reset --hard origin/main
+            GIT_SSH_COMMAND="$SSH_CMD" git fetch origin main
+            GIT_SSH_COMMAND="$SSH_CMD" git checkout main
+            GIT_SSH_COMMAND="$SSH_CMD" git reset --hard origin/main
             FRONT_TAG=$(git rev-parse --short HEAD)
             printf '{"frontend_commit":"%s"}\n' "$FRONT_TAG" > /srv/hcasc/_repos/dagmarcom-frontend/frontend-version.json
             rsync -a --delete --exclude='.git' /srv/hcasc/_repos/dagmarcom-frontend/ /opt/dagmarcom/frontend/
